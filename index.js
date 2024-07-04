@@ -36,6 +36,21 @@ function playAudio() {
     audio.play();
 }
 
+function getUniqueObjects(objects) {
+    const uniqueObjects = {};
+
+    for (const object of objects) {
+        const key = object.w;
+        if (uniqueObjects[key]) {
+            continue;
+        }
+        uniqueObjects[key] = object;
+    }
+
+    return Object.values(uniqueObjects);
+}
+
+
 function getDuplicateWords(words) {
     const duplicates = {};
     let i = 0;
@@ -64,6 +79,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let words = dic;
 
     console.log(getDuplicateWords(dic));
+    console.log(getUniqueObjects(dic));
     
     initAutocomplete();
     function initAutocomplete() {
