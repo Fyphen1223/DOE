@@ -36,9 +36,35 @@ function playAudio() {
     audio.play();
 }
 
+function getDuplicateWords(words) {
+    const duplicates = {};
+    let i = 0;
+    for (const wordObj of words) {
+        i++;
+        const word = wordObj.w;
+        if (duplicates[word]) {
+            duplicates[word] += 1;
+        } else {
+            duplicates[word] = 1;
+        }
+    }
+    const result = [];
+    for (const [word, count] of Object.entries(duplicates)) {
+        if (count > 1) {
+            result.push(word);
+        }
+    }
+    console.log(i);
+    return result;
+}
+
+
+
 document.addEventListener("DOMContentLoaded", function() {
     let words = dic;
 
+    console.log(getDuplicateWords(dic));
+    
     initAutocomplete();
     function initAutocomplete() {
         const searchBox = document.getElementById('search-box');
