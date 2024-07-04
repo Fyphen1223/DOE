@@ -119,3 +119,27 @@ async function generateExample(word) {
     const response = await res.json();
     return response.gpt;
 }
+
+async function generateTranslation(word) {
+    const res = await fetch('https://nexra.aryahcr.cc/api/chat/gpt', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            messages: [
+                {
+                    role: 'user', content: 'From now on, you will receive sentences from user. Please translate the sentences into Japanese. Not an explanation. This is the format: <TRANSLATION FOR THE SENTENCE> .'
+                },
+                {
+                    role: 'assistant', content: 'Ok.'
+                }
+            ],
+            prompt: word,
+            model: "gpt-3.5-turbo",
+            markdown: false
+        })
+    });
+    const response = await res.json();
+    return response.gpt;
+}
